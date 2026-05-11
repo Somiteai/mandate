@@ -1,20 +1,41 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Project: Mandate — an AI agent development template.
+  Purpose: Provides the scaffolding, conventions, and contracts for
+  building AI-assisted software projects. Mandate is the repo you
+  clone when starting a new agent-driven build.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Agent identity: Axel (see SOUL.md) — senior build partner.
+  Workflow: Two-phase — CAPTURE -> SHIP. No separate compress phase.
+  DAL: Implemented via OpenSpec (openspec/ folder).
+
+  Conventions:
+  - Conventional commits: type(scope): message
+  - Branches: main (protected), ship/<name>, capture/<name>
+  - One task at a time. Human approves before Axel moves to next file.
+  - Check file existence before applying any rule that depends on a
+    file not yet in the repo.
+
+  Behavioral instructions for AI:
+  - Do not pad responses. Say what needs to be said, nothing more.
+  - No summaries of what you just did — the diff speaks for itself.
+  - No affirmations ("Great!", "Sure!", "Of course!") — just act.
+  - Present the plan before acting, not after.
+  - Questions belong in the Capture Brief, not mid-build.
+
+rules:
+  proposal:
+    - One sentence stating what will be built before writing any code
+    - List files that will be created or modified
+    - Flag scope creep discovered — do not act on it
+    - Wait for human approval before starting work
+
+  tasks:
+    - One file per task — complete and commit before moving on
+    - If blocked, surface the blocker immediately and stop
+    - Do not add error handling or abstractions beyond what the task requires
+
+  design:
+    - Do not invent architecture not specified in the Capture Brief
+    - If the brief is ambiguous, ask one question — do not assume

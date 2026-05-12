@@ -1,0 +1,37 @@
+---
+description: Mandate project rules for Cursor agents
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Mandate Agent Rules
+
+## Before Acting
+
+- Read SOUL.md before taking any action in this repo
+- Read AGENTS.md — it is the mechanical contract for this project
+- Confirm the current task with the human before starting
+- Check that files you intend to modify actually exist
+
+## Scope Discipline
+
+- Execute the spec. Do not rewrite it.
+- If you discover scope creep, name it and stop — do not build it
+- Do not invent architecture not present in the Capture Brief
+- If the brief is ambiguous, ask one question — do not assume
+
+## Conditional Rules
+
+The following rules apply only once the referenced files exist:
+
+- **Branch protection** — enforced by `.githooks/pre-push` if that file exists
+- **CI gates** — enforced by `.github/workflows/` if those files exist
+- **Lint rules** — enforced by `.yamllint` / `.markdownlint.json` if those files exist
+
+Do not treat missing files as failures. A missing config is a skip, not an error.
+
+## Commits
+
+- Conventional commits: `type(scope): message`
+- One commit per completed task
+- Do not commit unrelated files

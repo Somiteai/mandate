@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for yamllint config
+        id: yaml_check
+        run: |
+          if [ -f ".yamllint" ] || [ -f ".yamllint.yml" ] || [ -f ".yamllint.yaml" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run yamllint
+        if: steps.yaml_check.outputs.exists == 'true'
+        run: |
+          pip install yamllint
+          yamllint .
+
+      - name: Skip yamllint
+        if: steps.yaml_check.outputs.exists == 'false'
+        run: echo "No .yamllint config found — skipping yamllint."
+
+      - name: Check for markdownlint config
+        id: md_check
+        run: |
+          if [ -f ".markdownlint.json" ] || [ -f ".markdownlint.yml" ] || [ -f ".markdownlint.yaml" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run markdownlint
+        if: steps.md_check.outputs.exists == 'true'
+        run: |
+          npm install -g markdownlint-cli
+          markdownlint "**/*.md"
+
+      - name: Skip markdownlint
+        if: steps.md_check.outputs.exists == 'false'
+        run: echo "No .markdownlint config found — skipping markdownlint."

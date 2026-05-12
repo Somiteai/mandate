@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for test runner config
+        id: test_check
+        run: |
+          if [ -f "package.json" ] || [ -f "pytest.ini" ] || [ -f "pyproject.toml" ] \
+            || [ -f "go.mod" ] || [ -f "Makefile" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: No test runner configured
+        if: steps.test_check.outputs.exists == 'false'
+        run: echo "No test runner config found — skipping. Add your stack and configure this workflow."
+
+      - name: Test runner detected — configure this workflow
+        if: steps.test_check.outputs.exists == 'true'
+        run: |
+          echo "Test runner config detected. Configure the steps below for your stack."
+          echo "Examples: 'npm test', 'pytest', 'go test ./...', 'make test'"
+          exit 1

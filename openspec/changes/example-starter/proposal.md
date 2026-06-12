@@ -19,5 +19,5 @@ Example change for Mandate template users. Shows what a complete OpenSpec artifa
 
 ## Impact
 
-- `openspec/changes/_example-starter/` only
+- `openspec/changes/example-starter/` only
 - Safe to archive or delete when starting a real project

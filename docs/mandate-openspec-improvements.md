@@ -13,7 +13,7 @@ Use this when evolving the Mandate template repo.
 - [ ] `docs/START.md` is linked from root README
 - [ ] `scripts/init-project.sh` sets project name + `ACTIVE_CHANGE`
 - [ ] `openspec/config.yaml.example` → copied to `config.yaml` per project
-- [ ] Example change `openspec/changes/_example-starter/` ships with the template
+- [ ] Example change `openspec/changes/example-starter/` ships with the template
 
 ## Agent contract
 

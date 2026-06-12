@@ -1,6 +1,6 @@
 # Mandate
 
-A template for AI-assisted software projects.
+The agentic development harness that turns Cursor into a reliable senior engineering partner.
 
 Clone this repo to get a working agent development environment with
 conventions, contracts, and CI already in place.

@@ -9,9 +9,11 @@ It is read-only context for agents — not a prompt, not a suggestion.
 
 Before any action:
 1. Read SOUL.md
-2. Read the current OpenSpec proposal or Capture Brief for this session
-3. Confirm current task with human before starting
-4. Check what files actually exist before applying any rules that depend on them
+2. Read `openspec/ACTIVE_CHANGE`, then `openspec/changes/<that-name>/tasks.md`
+   - If no ACTIVE_CHANGE: read the Capture Brief in `openspec/storms/*-capture.md`
+3. Do not start new application code without an OpenSpec change and human-approved `proposal.md`
+4. Confirm the current task (first unchecked item in `tasks.md`) with the human
+5. Check what files actually exist before applying rules that depend on them
 
 ---
 
@@ -26,6 +28,7 @@ Any agent operating here must read SOUL.md before taking action.
 
 - `main` — protected. No direct pushes. Ever.
 - `ship/<short-description>` — active build branch. One per task.
+- Prefer `ship/<openspec-change-name>` or `ship/<change-name>-<slice>` aligned with `openspec/ACTIVE_CHANGE`
 - `capture/<short-description>` — for capture/research work only.
 
 Branch naming is enforced by convention now.

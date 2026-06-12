@@ -1,11 +1,14 @@
 #!/bin/bash
-# Prevents direct pushes to main. Use a ship/ or capture/ branch.
+# Blocks pushes that update origin/main. Allows branch deletes and other refs.
 
-protected_branch="main"
-current_branch=$(git symbolic-ref HEAD | sed 's|refs/heads/||')
+protected_ref="refs/heads/main"
 
-if [ "$current_branch" = "$protected_branch" ]; then
-  echo "ERROR: Direct push to '$protected_branch' is not allowed."
-  echo "Use a ship/<name> or capture/<name> branch and open a PR."
-  exit 1
-fi
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "$protected_ref" ]; then
+    echo "ERROR: Direct push to 'main' is not allowed."
+    echo "Use a ship/<name> or capture/<name> branch and open a PR."
+    exit 1
+  fi
+done
+
+exit 0

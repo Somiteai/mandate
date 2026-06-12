@@ -5,6 +5,15 @@ A template for AI-assisted software projects.
 Clone this repo to get a working agent development environment with
 conventions, contracts, and CI already in place.
 
+## Building with Mandate + OpenSpec
+
+1. **Start here:** [docs/START.md](docs/START.md)
+2. **Environment:** [docs/dev-environment.md](docs/dev-environment.md)
+3. **New project:** `./scripts/init-project.sh`
+4. **Agent commands:** `/opsx:propose`, `/opsx:apply`, `/opsx:archive`
+
+Active work is tracked in `openspec/changes/<name>/tasks.md` (see `openspec/ACTIVE_CHANGE`).
+
 ---
 
 ## What's Included
@@ -24,11 +33,11 @@ conventions, contracts, and CI already in place.
 ## Setup After Cloning
 
 ```bash
-# Activate the pre-push hook
-git config core.hooksPath .githooks
+./scripts/setup-git-hooks.sh
 ```
 
-That's it. Everything else works out of the box.
+For a new product repo cloned from this template, run `./scripts/init-project.sh` once.
+See [docs/START.md](docs/START.md) for the full CAPTURE → SHIP workflow.
 
 ---
 

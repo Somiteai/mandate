@@ -1,0 +1,43 @@
+name: OpenSpec
+
+on:
+  push:
+    paths:
+      - "openspec/**"
+  pull_request:
+    paths:
+      - "openspec/**"
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for OpenSpec CLI
+        id: cli
+        run: |
+          if command -v openspec >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            npm install -g @fission-ai/openspec@latest
+            echo "exists=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for ACTIVE_CHANGE
+        id: active
+        run: |
+          if [ -f openspec/ACTIVE_CHANGE ]; then
+            echo "name=$(tr -d '[:space:]' < openspec/ACTIVE_CHANGE)" >> $GITHUB_OUTPUT
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Skip — no ACTIVE_CHANGE
+        if: steps.active.outputs.exists != 'true'
+        run: echo "No openspec/ACTIVE_CHANGE — skipping status check."
+
+      - name: OpenSpec status
+        if: steps.active.outputs.exists == 'true'
+        run: openspec status --change "${{ steps.active.outputs.name }}"

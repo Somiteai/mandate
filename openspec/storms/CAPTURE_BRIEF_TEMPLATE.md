@@ -39,3 +39,15 @@
 [Anything specific Axel should know before starting. Tech constraints, preferences, decisions already made.]
 
 -
+
+## OpenSpec handoff (required before SHIP)
+
+| Field | Value |
+|-------|--------|
+| **Change name** (kebab-case) | `my-feature-name` |
+| **Storm file** | `openspec/storms/<this-file>.md` |
+| **Next command** | `/opsx:propose my-feature-name` |
+| **Branch for capture** | `capture/<short-name>` |
+| **Branch for implementation** | `ship/my-feature-name` |
+
+Do not start application code until `openspec/changes/<change-name>/tasks.md` exists and the human approves `proposal.md`.

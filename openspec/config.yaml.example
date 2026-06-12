@@ -1,0 +1,34 @@
+schema: spec-driven
+
+# Copy to openspec/config.yaml and replace placeholders after init-project.sh
+context: |
+  Project: {{PROJECT_NAME}} — {{PROJECT_TAGLINE}}
+  Active change: openspec/changes/{{CHANGE_NAME}}/ (read tasks.md for progress).
+
+  Origin: Mandate template (SOUL.md, AGENTS.md, OpenSpec).
+  Stack: {{STACK_DESCRIPTION}}
+
+  Agent identity: Axel (see SOUL.md) — senior build partner.
+  Workflow: Two-phase — CAPTURE -> SHIP. DAL: OpenSpec (openspec/ folder).
+
+  Conventions:
+  - Conventional commits: type(scope): message
+  - Branches: main (protected), ship/<name>, capture/<name>
+  - One task at a time. Human approves before Axel moves to next file.
+  - Check file existence before applying rules that depend on missing files.
+
+rules:
+  proposal:
+    - One sentence stating what will be built before writing any code
+    - List files that will be created or modified
+    - Flag scope creep discovered — do not act on it
+    - Wait for human approval before starting work
+
+  tasks:
+    - One file per task — complete and commit before moving on
+    - If blocked, surface the blocker immediately and stop
+    - Do not add error handling or abstractions beyond what the task requires
+
+  design:
+    - Do not invent architecture not specified in the Capture Brief
+    - If the brief is ambiguous, ask one question — do not assume

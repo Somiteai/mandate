@@ -18,11 +18,11 @@ Details: [harness-vs-project.md](harness-vs-project.md).
 
 | Phase | Branch | Output |
 |---|---|---|
-| **Explore / landscape** | none, or `capture/<name>` | Thinking only (`/opsx:explore`). Cross-project notes → `~/MDS/landscape/` |
+| **Explore / landscape** | none, or `capture/<name>` | Thinking only. Cross-project notes → `~/MDS/landscape/` |
 | **CAPTURE (storm)** | `capture/<name>` | `openspec/storms/<project>-capture.md` |
-| **Spec + plan** | `ship/<change-name>` | `/opsx:propose` → `proposal.md`, `design.md`, `specs/`, `tasks.md` |
-| **Execute** | `ship/<change-name>` | `/opsx:apply` — first unchecked task only |
-| **Archive** | PR to `main` then `/opsx:archive` | Living specs in `openspec/specs/` (product repo) |
+| **Spec + plan** | `ship/<change-name>` | `proposal.md`, `design.md`, `specs/`, `tasks.md` |
+| **Execute** | `ship/<change-name>` | First unchecked task only |
+| **Archive** | PR to `main`, then archive | Living specs in `openspec/specs/` (product repo) |
 
 **Rule:** No feature code on `main` without an OpenSpec change whose `tasks.md` drove the work.
 
@@ -35,9 +35,9 @@ OpenSpec is built for **changes to an existing repo**. Storms are how Mandate st
 3. Run `./scripts/init-project.sh` (project name + first change name) — this **replaces** Mandate’s `openspec/config.yaml` with the product
 4. Delete or archive `openspec/changes/example-starter` if you do not need it
 5. Fill `openspec/storms/<project>-capture.md` (PRD-level “what/why” lives here and in `docs/` of the **product**)
-6. Human reviews capture — **`/opsx:propose <change-name>`**
-7. Human approves `proposal.md` — **`/opsx:apply`**
-8. Merge PR to `main`; when tasks are `[x]`, **`/opsx:archive`**
+6. Human reviews capture — then write OpenSpec propose artifacts for `<change-name>`
+7. Human approves `proposal.md` — then apply `tasks.md`
+8. Merge PR to `main`; when tasks are `[x]`, archive the change
 
 ## Every agent session
 
@@ -47,11 +47,13 @@ OpenSpec is built for **changes to an existing repo**. Storms are how Mandate st
 4. First unchecked task only
 5. Branch `ship/<change-name>` — never push `main`
 
-## Commands
+## Workflow steps (any tool)
 
-| Command | When |
+These are **file and git** operations. Slash-command aliases are optional.
+
+| Step | When |
 |---|---|
-| `/opsx:explore` | Landscape — no app code |
-| `/opsx:propose <name>` | Specs + plan before code |
-| `/opsx:apply` | Implement tasks |
-| `/opsx:archive` | Change done — sync `openspec/specs/` |
+| Explore | Landscape — no app code (`docs/ide-agnostic.md`) |
+| Propose | Write `proposal.md`, `design.md`, `specs/`, `tasks.md` before code |
+| Apply | Implement the first unchecked task |
+| Archive | Change done — sync `openspec/specs/` |

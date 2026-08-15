@@ -17,7 +17,7 @@ Forbidden: product PRDs, app `src/`, a specific company’s playbooks.
 - `docs/` — stakeholder-readable PRD, architecture  
 - `src/` / tests — only when the product adds them  
 
-Share **these** files with stakeholders, not a Cursor chat.
+Share **these** files with stakeholders, not a chat log.
 
 ## `~/MDS/` (Mac disk, not this remote)
 

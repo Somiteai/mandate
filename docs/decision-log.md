@@ -32,4 +32,4 @@ not reckless.
 ## 2026-08-15 — macOS + Dev Container; harness vs product specs
 
 **Decision:** Recommend macOS + official Node 22 Dev Container (non-root). Keep product PRD/OpenSpec out of the Mandate template; use `~/MDS/` for cross-project landscape.
-**Why:** WSL docs were host-specific. Putting project specs in the template caused CI/spec collisions. OpenSpec stays the SHIP format; storms stay CAPTURE.
+**Why:** WSL docs were host-specific. Putting project specs in the template caused CI/spec collisions. OpenSpec stays the SHIP format; storms stay CAPTURE. Canonical contract is `SOUL.md` / `AGENTS.md` / `openspec/` / `docs/` — not per-vendor IDE folders.

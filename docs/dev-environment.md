@@ -1,6 +1,6 @@
 # Development environment (Mandate on macOS)
 
-WSL/Windows is **legacy**. Do not follow old WSL paste/`npx` `.cursor-server` notes on this Mac.
+WSL/Windows is **legacy**. Do not follow old WSL-only notes on this Mac.
 
 ## Once per Mac (host)
 
@@ -8,11 +8,11 @@ WSL/Windows is **legacy**. Do not follow old WSL paste/`npx` `.cursor-server` no
 2. Homebrew (core only). Do not `brew tap` strangers.
 3. `brew install git gh mise` and Docker Desktop (`brew install --cask docker-desktop` — needs your Mac password).
 4. `gh auth login` — GitHub.com, HTTPS, browser.
-5. Cursor. Open the **project folder**, then **Reopen in Container**.
+5. Open the **project folder** in any IDE. If it supports Dev Containers, reopen in the container.
 6. Create `~/MDS/` for global landscape (see [harness-vs-project.md](harness-vs-project.md)).
 
-**On the host:** git, gh, Docker, Cursor, Homebrew.  
-**Not on the host:** Node, npm, `openspec` CLI (those belong in the container).
+**On the host:** git, gh, Docker Desktop, Homebrew, an editor.  
+**Not on the host:** Node, npm, OpenSpec CLI (those belong in the container).
 
 `mise` may live on the host for non-container tools; Node for Mandate work still runs **in** the Dev Container.
 
@@ -53,7 +53,7 @@ Sets `core.hooksPath` **in this repo only**. Hooks must be **LF** (`.gitattribut
 cat openspec/ACTIVE_CHANGE
 ```
 
-Product work: fill `openspec/storms/`, then `/opsx:propose`. Do not store product specs in the Mandate template remote.
+Product work: fill `openspec/storms/`, then add OpenSpec propose artifacts. Do not store product specs in the Mandate template remote.
 
 ## SQLite (only if the product uses it)
 

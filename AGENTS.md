@@ -86,3 +86,7 @@ on empty repos. A missing test suite is not a failure.
 Rules in this file apply immediately.
 Rules that reference other files (workflows, hooks, docs) activate
 only once those files exist in the repo.
+
+Vendor-specific trees (`.cursor/`, `.claude/`, `.gemini/`, `.opencode/`, and similar)
+are **not** the Mandate contract. Do not add or revise them as the harness.
+Any agent in any IDE must follow this file and `SOUL.md`.

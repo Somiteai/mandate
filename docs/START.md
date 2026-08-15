@@ -1,47 +1,57 @@
-# START — Mandate + OpenSpec workflow
+# START — Mandate loop (CAPTURE → SHIP)
 
-Read this before writing application code in a new Mandate-based project.
+Read this before writing **application** code. Mandate is the **harness**, not the product.
 
-## Phases
+## Two libraries (do not mix)
+
+| Library | Where | What |
+|---|---|---|
+| **Harness** | This repo (`Somiteai/mandate`) | `SOUL.md`, `AGENTS.md`, OpenSpec **of the template**, hooks, CI, Dev Container |
+| **Product** | A **clone** after `./scripts/init-project.sh` | PRD, architecture, `openspec/storms/*-capture.md`, `openspec/changes/`, later `src/` |
+| **Global MDS** | `~/MDS/` (**not git in this repo**) | Landscape/brainstorm that is not about one project |
+
+Never put a product PRD or FlagFootballGirls specs in the Mandate template. That was the first design bug.
+
+Details: [harness-vs-project.md](harness-vs-project.md).
+
+## Phases (Harness + loop + OpenSpec)
 
 | Phase | Branch | Output |
-|-------|--------|--------|
-| **CAPTURE** | `capture/<name>` | `openspec/storms/<project>-capture.md` |
-| **SHIP** | `ship/<change-name>` | Code + PR to `main` driven by OpenSpec tasks |
+|---|---|---|
+| **Explore / landscape** | none, or `capture/<name>` | Thinking only (`/opsx:explore`). Cross-project notes → `~/MDS/landscape/` |
+| **CAPTURE (storm)** | `capture/<name>` | `openspec/storms/<project>-capture.md` |
+| **Spec + plan** | `ship/<change-name>` | `/opsx:propose` → `proposal.md`, `design.md`, `specs/`, `tasks.md` |
+| **Execute** | `ship/<change-name>` | `/opsx:apply` — first unchecked task only |
+| **Archive** | PR to `main` then `/opsx:archive` | Living specs in `openspec/specs/` (product repo) |
 
 **Rule:** No feature code on `main` without an OpenSpec change whose `tasks.md` drove the work.
 
+OpenSpec is built for **changes to an existing repo**. Storms are how Mandate starts **before** that repo has a product.
+
 ## New project checklist
 
-1. Clone Mandate template → rename repo
-2. Run `./scripts/init-project.sh` (project name + first change name)
-3. Fill `openspec/storms/<project>-capture.md` (use template)
-4. Human reviews capture — then **`/opsx:propose <change-name>`** until all artifacts exist
-5. Human approves `proposal.md` — then **`/opsx:apply`** on `ship/<change-name>`
-6. Merge PR to `main`
-7. When all tasks are `[x]`, run **`/opsx:archive`** (syncs specs to `openspec/specs/`)
+1. Clone **this** template → new GitHub repo (the product)
+2. Open the clone in the Dev Container ([dev-environment.md](dev-environment.md))
+3. Run `./scripts/init-project.sh` (project name + first change name) — this **replaces** Mandate’s `openspec/config.yaml` with the product
+4. Delete or archive `openspec/changes/example-starter` if you do not need it
+5. Fill `openspec/storms/<project>-capture.md` (PRD-level “what/why” lives here and in `docs/` of the **product**)
+6. Human reviews capture — **`/opsx:propose <change-name>`**
+7. Human approves `proposal.md` — **`/opsx:apply`**
+8. Merge PR to `main`; when tasks are `[x]`, **`/opsx:archive`**
 
 ## Every agent session
 
 1. Read `SOUL.md` and `AGENTS.md`
-2. Read `openspec/ACTIVE_CHANGE` → open `openspec/changes/<name>/tasks.md`
-3. Work the **first unchecked** task only
-4. Branch `ship/<change-name>` or `ship/<change-name>-<slice>` — never push directly to `main`
+2. Confirm you are in a **product** clone before writing product specs
+3. Read `openspec/ACTIVE_CHANGE` → `openspec/changes/<name>/tasks.md`
+4. First unchecked task only
+5. Branch `ship/<change-name>` — never push `main`
 
-## Commands (Cursor / Claude / OpenCode)
+## Commands
 
 | Command | When |
-|---------|------|
-| `/opsx:propose <name>` | New feature — create proposal, design, specs, tasks **before** code |
-| `/opsx:apply` | Implement tasks from active change |
-| `/opsx:archive` | Change complete — archive and sync main specs |
-| `/opsx:explore` | Thinking only — no application code |
-
-## If you already built code without OpenSpec
-
-1. Do **not** delete working code
-2. Create change: `openspec new change <name>`
-3. Write `proposal.md`, `design.md`, specs, `tasks.md` — mark completed work `[x]`, leave rest `[ ]`
-4. Continue with `/opsx:apply` on remaining tasks
-
-See `docs/mandate-openspec-improvements.md` for the full rationale.
+|---|---|
+| `/opsx:explore` | Landscape — no app code |
+| `/opsx:propose <name>` | Specs + plan before code |
+| `/opsx:apply` | Implement tasks |
+| `/opsx:archive` | Change done — sync `openspec/specs/` |

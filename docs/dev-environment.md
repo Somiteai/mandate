@@ -1,70 +1,60 @@
-# Development environment (Mandate projects)
+# Development environment (Mandate on macOS)
 
-## Cursor + WSL (recommended)
+WSL/Windows is **legacy**. Do not follow old WSL paste/`npx` `.cursor-server` notes on this Mac.
 
-1. Install WSL2 + Ubuntu
-2. Install Cursor WSL extension
-3. Open project from WSL terminal:
+## Once per Mac (host)
 
-   ```bash
-   cd ~/projects/<your-repo>
-   cursor .
-   ```
+1. FileVault on (System Settings → Privacy & Security).
+2. Homebrew (core only). Do not `brew tap` strangers.
+3. `brew install git gh mise` and Docker Desktop (`brew install --cask docker-desktop` — needs your Mac password).
+4. `gh auth login` — GitHub.com, HTTPS, browser.
+5. Cursor. Open the **project folder**, then **Reopen in Container**.
+6. Create `~/MDS/` for global landscape (see [harness-vs-project.md](harness-vs-project.md)).
 
-4. Confirm status bar shows **WSL: Ubuntu** (not only a Windows path)
+**On the host:** git, gh, Docker, Cursor, Homebrew.  
+**Not on the host:** Node, npm, `openspec` CLI (those belong in the container).
+
+`mise` may live on the host for non-container tools; Node for Mandate work still runs **in** the Dev Container.
+
+## Once per clone (container)
+
+`.devcontainer/devcontainer.json` uses Docker Official **Node 22 (bookworm)**. The workspace is this repo only — not `$HOME`.
+
+After Docker Desktop is running, pin the image digest:
+
+```bash
+docker pull node:22-bookworm
+docker image inspect node:22-bookworm --format '{{index .RepoDigests 0}}'
+```
+
+Put that digest in `devcontainer.json` `image` (`node@sha256:...`) so `:22-bookworm` cannot silently move.
+
+Inside the container:
+
+```bash
+node -v          # 22.x
+./scripts/setup-git-hooks.sh
+# OpenSpec CLI (container only):
+npm install --prefix /usr/local @fission-ai/openspec
+# or npx @fission-ai/openspec …  — do not npm -g on the Mac host
+```
 
 ## Git hooks
-
-Mandate uses `.githooks/pre-push` to block pushes **to** `main`.
 
 ```bash
 ./scripts/setup-git-hooks.sh
 ```
 
-This sets `git config core.hooksPath .githooks` in **this repo only**.
+Sets `core.hooksPath` **in this repo only**. Hooks must be **LF** (`.gitattributes`). CRLF breaks bash.
 
-Hooks must use **LF** line endings (see `.gitattributes`). CRLF breaks bash with `syntax error: unexpected end of file`.
-
-## Terminal paste (WSL)
-
-In Cursor’s integrated terminal, **right-click** often pastes when `Ctrl+Shift+V` does not.
-
-## Node / npm
-
-Run install and dev commands inside WSL:
-
-```bash
-node -v   # prefer 20.19+ or 22.x for latest eslint
-npm install
-```
-
-If `npx` fails with `.cursor-server` path errors, use system npm:
-
-```bash
-export NPM_CONFIG_PREFIX=/tmp/npm-global
-export NPM_CONFIG_CACHE=/tmp/npm-cache
-mkdir -p "$NPM_CONFIG_PREFIX/lib" "$NPM_CONFIG_CACHE"
-```
-
-## OpenSpec CLI
-
-```bash
-npm install -g @fission-ai/openspec@latest
-openspec --version
-```
-
-Check active change:
+## OpenSpec
 
 ```bash
 cat openspec/ACTIVE_CHANGE
-openspec status --change "$(cat openspec/ACTIVE_CHANGE)"
 ```
 
-## Database (when project uses SQLite)
+Product work: fill `openspec/storms/`, then `/opsx:propose`. Do not store product specs in the Mandate template remote.
 
-```bash
-npm run db:push   # not "dp:push"
-npm run db:seed
-```
+## SQLite (only if the product uses it)
 
-If `database is locked`, stop `npm run dev`, run db commands, restart dev.
+In the **product** clone, inside the container: stop `npm run dev` before `db:push` if you see `database is locked`.

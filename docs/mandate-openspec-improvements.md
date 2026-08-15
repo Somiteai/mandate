@@ -39,7 +39,7 @@ Use this when evolving the Mandate template repo.
 
 ## Distribution
 
-- [ ] Consider single source for OpenSpec skills + sync script (reduce `.cursor`/`.claude`/… drift)
+- [ ] Do **not** treat `.cursor` / `.claude` / `.gemini` / `.opencode` as source of truth (see `docs/ide-agnostic.md`)
 
 ## Retrofit path (brownfield)
 
@@ -47,4 +47,4 @@ Document for teams who coded first:
 
 1. `openspec new change <name>`
 2. Write artifacts; mark done tasks `[x]`
-3. Continue `/opsx:apply` for remainder
+3. Continue applying remaining tasks in `tasks.md`

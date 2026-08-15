@@ -13,7 +13,7 @@ fi
 chmod +x .githooks/pre-push
 git config core.hooksPath .githooks
 
-# Normalize CRLF if present (WSL / Windows checkout)
+# Normalize CRLF if present (legacy Windows checkout)
 if command -v sed >/dev/null 2>&1; then
   sed -i 's/\r$//' .githooks/pre-push 2>/dev/null || sed -i '' 's/\r$//' .githooks/pre-push
 fi

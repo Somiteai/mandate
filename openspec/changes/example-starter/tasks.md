@@ -12,4 +12,4 @@ Copy this folder structure when documenting a real project. Rename `example-star
 
 - [ ] 2.1 Run `./scripts/init-project.sh`
 - [ ] 2.2 Fill `openspec/storms/<project>-capture.md`
-- [ ] 2.3 `/opsx:propose <your-change-name>` — do not copy this example change to production code paths
+- [ ] 2.3 Write propose artifacts for `<your-change-name>` — do not copy this example change into product code

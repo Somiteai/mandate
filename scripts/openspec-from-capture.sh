@@ -32,5 +32,5 @@ echo ""
 if command -v openspec >/dev/null 2>&1; then
   openspec status --change "$CHANGE" 2>/dev/null || true
 else
-  echo "(Install openspec CLI for status: npm i -g @fission-ai/openspec@latest)"
+  echo "(OpenSpec CLI: run inside the Dev Container, e.g. npx @fission-ai/openspec — not npm -g on the Mac host)"
 fi

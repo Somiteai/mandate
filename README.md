@@ -1,16 +1,15 @@
 # Mandate
 
-The agentic development harness that turns Cursor into a reliable senior engineering partner.
+The agentic development harness: soul, loop, and OpenSpec in git — independent of IDE and of which model runs.
 
-Clone this repo to get a working agent development environment with
-conventions, contracts, and CI already in place.
+Clone this repo to start a **product**. This template is the harness, not the app. Product PRDs and `src/` belong in the clone after `init-project.sh`. See [docs/harness-vs-project.md](docs/harness-vs-project.md) and [docs/ide-agnostic.md](docs/ide-agnostic.md).
 
 ## Building with Mandate + OpenSpec
 
 1. **Start here:** [docs/START.md](docs/START.md)
-2. **Environment:** [docs/dev-environment.md](docs/dev-environment.md)
+2. **Environment (macOS + Dev Container):** [docs/dev-environment.md](docs/dev-environment.md)
 3. **New project:** `./scripts/init-project.sh`
-4. **Agent commands:** `/opsx:propose`, `/opsx:apply`, `/opsx:archive`
+4. **Loop:** explore → capture → propose → apply → archive (see [docs/START.md](docs/START.md))
 
 Active work is tracked in `openspec/changes/<name>/tasks.md` (see `openspec/ACTIVE_CHANGE`).
 
@@ -24,9 +23,9 @@ Active work is tracked in `openspec/changes/<name>/tasks.md` (see `openspec/ACTI
 | `AGENTS.md` | Mechanical contract: branches, commits, PR gate, failure policy |
 | `openspec/` | Spec-driven development layer (proposals, tasks, changes) |
 | `.github/workflows/` | Conditional CI — lint and tests, gated on file existence |
-| `.cursor/rules/mandate.mdc` | Cursor agent rules |
-| `.githooks/pre-push` | Blocks direct pushes to main |
-| `docs/` | Autonomy levels, rollback playbook, decision log |
+| `.githooks/pre-push` | Blocks direct pushes to `main` |
+| `docs/` | Start, Mac env, harness vs product, IDE-agnostic contract, autonomy, rollback |
+| `.devcontainer/` | Node 22 container (project folder only) |
 
 ---
 

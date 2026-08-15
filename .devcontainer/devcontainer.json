@@ -1,0 +1,10 @@
+{
+  "name": "Mandate",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "mandate",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "postCreateCommand": "git config --global --add safe.directory /workspace && ./scripts/setup-git-hooks.sh"
+}

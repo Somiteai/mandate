@@ -20,7 +20,8 @@ fi
 # openspec config
 if [[ -f openspec/config.yaml ]]; then
   read -rp "openspec/config.yaml exists. Overwrite? [y/N] " OVERWRITE
-  if [[ "${OVERWRITE,,}" != "y" ]]; then
+  OVERWRITE_LC="$(printf '%s' "$OVERWRITE" | tr '[:upper:]' '[:lower:]')"
+  if [[ "$OVERWRITE_LC" != "y" ]]; then
     echo "Skipping config.yaml"
   else
     WRITE_CONFIG=1

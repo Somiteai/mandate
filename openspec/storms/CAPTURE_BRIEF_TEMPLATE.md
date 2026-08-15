@@ -46,7 +46,7 @@
 |-------|--------|
 | **Change name** (kebab-case) | `my-feature-name` |
 | **Storm file** | `openspec/storms/<this-file>.md` |
-| **Next command** | `/opsx:propose my-feature-name` |
+| **Next step** | Write OpenSpec propose artifacts for `my-feature-name` |
 | **Branch for capture** | `capture/<short-name>` |
 | **Branch for implementation** | `ship/my-feature-name` |
 
